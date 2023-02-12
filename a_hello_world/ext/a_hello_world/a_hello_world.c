@@ -19,6 +19,7 @@ Init_a_hello_world(void)
   //                    - `rb_mKernel` => module Kernel
   //                    - `rb_cInteger` => class Integer
   //               - 2: symbol (:puts)
+  //                    - called `mid` for "method ID" (or method symbol)
   //               - 3: number of arguments (1)
   //               - *: arguments ("Hello world!")
   rb_funcall(rb_mKernel, id_puts, 1, hello_world_str);
