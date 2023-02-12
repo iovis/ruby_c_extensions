@@ -329,9 +329,31 @@ create_array_of_strings(VALUE self)
   return array;
 }
 
+VALUE
+reversed_string(VALUE self, VALUE string)
+{
+  rb_puts(string);
+
+  size_t len = RSTRING_LEN(string);
+  rb_puts(LONG2FIX(len));
+
+  char* buff = StringValuePtr(string);
+
+  for (size_t i = 0, j = len - 1; i < j; i++, j--) {
+    char tmp = buff[i];
+    // printf("%c, %c\n", buff[i], buff[j]);
+    buff[i] = buff[j];
+    buff[j] = tmp;
+  }
+
+  return string;
+}
+
 void
 Init_d_primitive_data_types(void)
 {
   rb_define_method(
     rb_mKernel, "create_array_of_strings", create_array_of_strings, 0);
+
+  rb_define_method(rb_mKernel, "reversed_string", reversed_string, 1);
 }
