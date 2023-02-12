@@ -1,4 +1,6 @@
 #include "d_primitive_data_types.h"
+#include "ruby/internal/eval.h"
+#include "ruby/internal/method.h"
 
 VALUE rb_mDPrimitiveDataTypes;
 
@@ -307,8 +309,29 @@ VALUE rb_mDPrimitiveDataTypes;
 /// ```
 ///
 
+////////////////////////////////////////////////////////////
+
+static void
+rb_puts(VALUE val)
+{
+  rb_funcall(rb_mKernel, rb_intern("puts"), 1, val);
+}
+
+VALUE
+create_array_of_strings(VALUE self)
+{
+  VALUE array = rb_ary_new();
+
+  rb_ary_push(array, rb_str_new_cstr("one"));
+  rb_ary_push(array, rb_str_new_cstr("two"));
+  rb_ary_push(array, rb_str_new_cstr("three"));
+
+  return array;
+}
+
 void
 Init_d_primitive_data_types(void)
 {
-  rb_define_module("DPrimitiveDataTypes");
+  rb_define_method(
+    rb_mKernel, "create_array_of_strings", create_array_of_strings, 0);
 }

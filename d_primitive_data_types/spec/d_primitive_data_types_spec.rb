@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe DPrimitiveDataTypes do
-  it "has a version number" do
-    expect(DPrimitiveDataTypes::VERSION).not_to be nil
-  end
+  describe ".create_array_of_strings" do
+    subject { create_array_of_strings }
 
-  it "does something useful" do
-    expect(false).to eq(true)
+    it do
+      is_expected.to eq %w[
+        one
+        two
+        three
+      ]
+    end
   end
 end
